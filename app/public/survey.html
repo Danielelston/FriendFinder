@@ -34,8 +34,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h1 id="friendName"></h1>
-                        <img id="friendImg" width="50%">
+                        <h1 id="bestFriendName"></h1>
+                        <img id="bestFriendImg" width="50%">
                     </div>
                     <div class="modal-footer">
                         <a href="/*"><button type="button" class="btn btn-primary">Home</button></a>
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>The truth is more important than sensitivites.</label>
+                                <label>We are testing you, not you testing this app.</label>
                                 <div class="col-sm-2 p-0">
                                     <select class="surveyQuestion" id="question6">
                                         <option value="1" selected>1 (Strongly Disagree)</option>
@@ -195,7 +195,7 @@
         <script>
 
             const questionList = $('.surveyQuestion');
-            console.log(questionList);
+
             const postForm = () => {
 
                 console.log("post form");
@@ -205,6 +205,9 @@
                 const friendName = $('#friendName').val().trim();
                 const friendPictureURL = $('#imgsrc').val().trim();
                 const answerArray = [];
+
+                let bestFriendName = $('#bestFriendName');
+                let bestFriendImg = $('#bestFriendImg');
 
                 questionList.each(function () {
 
@@ -235,29 +238,29 @@
                 for (const question of questionList) {
                     $(question).val('1');
                 }
-                $('#friendName').val('');
+                $('#bestFriendName').val('');
                 $('#friendPictureURL').val('');
             });
 
             const findFriend = user => {
 
                 $.get("/api/friends", data => {
-                    //initiate closestFriend as the friend at index 0.  Maximize bestDifference.
+
                     let closestFriend = data[0];
                     let bestDifference = 51;
-                    //loop over all potential friends
+
                     data.forEach(element => {
                         if (element.name === user.name) {
                             console.log('Closest friend is ' + closestFriend.name);
-                            $("#compatibleFriendName").text(closestFriend.name);
-                            $("#compatibleFriendImg").attr('src', closestFriend.imgsrc);
+                            $("#bestFriendName").text(closestFriend.name);
+                            $("#bestFriendImg").attr('src', closestFriend.img);
                         } else {
                             let difference = 0;
-                            //loop over each score
+
                             user.scores.forEach((score, scoreIndex) => {
                                 difference += Math.abs(element.scores[scoreIndex] - score);
                             })
-                            //Check if current friend is more compatible.
+
                             if (difference < bestDifference) {
                                 bestDifference = difference;
                                 closestFriend = element;

@@ -14,10 +14,12 @@ apiRoutes.get("/api/friends", function(req, res){
 
 apiRoutes.post("/api/friends", function(req, res){
     
-    console.log("got to post");
+   
     const newFriend = req.body;
     friendsArray.push(newFriend);
     res.json(newFriend);
+
+    console.log(newFriend);
 
 });
 
