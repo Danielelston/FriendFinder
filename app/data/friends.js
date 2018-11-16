@@ -1,18 +1,18 @@
-let friends = [
+let friendsArray = [
     {
         "name": "Harison",
         "img": "https://banner2.kisspng.com/20180324/frq/kisspng-businessperson-businessman-5ab5d75f23d914.4402540115218665911468.jpg",
         "scores": [
-            5,
+            1,
             1,
             4,
             4,
-            5,
             1,
+            5,
             2,
-            5,
-            4,
-            1
+            2,
+            3,
+            5
         ]
     },
     {
@@ -79,4 +79,6 @@ let friends = [
             5
         ]
     }
-]
+];
+
+module.exports = friendsArray;
