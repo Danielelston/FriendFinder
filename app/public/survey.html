@@ -35,7 +35,7 @@
                     </div>
                     <div class="modal-body">
                         <h1 id="bestFriendName"></h1>
-                        <img id="bestFriendImg" width="50%">
+                        <img id="bestFriendImg" src="" width="50%">
                     </div>
                     <div class="modal-footer">
                         <a href="/*"><button type="button" class="btn btn-primary">Home</button></a>
@@ -196,6 +196,9 @@
 
             const questionList = $('.surveyQuestion');
 
+            let bestFriendName = $('#bestFriendName');
+            let bestFriendImg = $('#bestFriendImg');
+
             const postForm = () => {
 
                 console.log("post form");
@@ -206,8 +209,7 @@
                 const friendPictureURL = $('#imgsrc').val().trim();
                 const answerArray = [];
 
-                let bestFriendName = $('#bestFriendName');
-                let bestFriendImg = $('#bestFriendImg');
+
 
                 questionList.each(function () {
 
@@ -220,7 +222,7 @@
 
                 const newFriend = {
                     name: friendName,
-                    photo: friendPictureURL,
+                    img: friendPictureURL,
                     scores: answerArray
                 };
 
@@ -239,7 +241,7 @@
                     $(question).val('1');
                 }
                 $('#bestFriendName').val('');
-                $('#friendPictureURL').val('');
+                $('#bestFriendImg').val('');
             });
 
             const findFriend = user => {
@@ -251,9 +253,11 @@
 
                     data.forEach(element => {
                         if (element.name === user.name) {
-                            console.log('Closest friend is ' + closestFriend.name);
                             $("#bestFriendName").text(closestFriend.name);
                             $("#bestFriendImg").attr('src', closestFriend.img);
+                            console.log('Closest friend name is ' + closestFriend.name);
+                            console.log('Closest friend img is ' + closestFriend.img);
+
                         } else {
                             let difference = 0;
 
